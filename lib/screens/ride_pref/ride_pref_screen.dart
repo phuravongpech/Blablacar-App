@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:week_3_blabla_project/utils/animations_util.dart';
 
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/ride_prefs_service.dart';
 import '../../theme/theme.dart';
 
 // import '../ride/ride_screen.dart';
+import '../ride/ride_screen.dart';
 import 'widgets/ride_pref_form.dart';
 import 'widgets/ride_pref_history_tile.dart';
 
@@ -24,13 +26,24 @@ class RidePrefScreen extends StatefulWidget {
 
 class _RidePrefScreenState extends State<RidePrefScreen> {
   onRidePrefSelected(RidePref ridePref) {
-    // 1 - Navigate to the rides screen (with a buttom to top animation)
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => RideScreen(ridePref: ridePref),
-    //   ),
-    // );
+    //1 - Navigate to the rides screen (with a buttom to top animation)
+    Navigator.push(
+        context,
+        AnimationUtils.createBottomToTopRoute(
+          RideScreen(ridePref: ridePref),
+        ));
+  }
+
+  onSearchRidePref(RidePref ridePref) {
+    //1 - Save the ride preference
+    RidePrefService.currentRidePref = ridePref;
+
+    //2 - Navigate to the rides screen (with a buttom to top animation)
+    Navigator.push(
+        context,
+        AnimationUtils.createBottomToTopRoute(
+          RideScreen(ridePref: ridePref),
+        ));
   }
 
   @override
@@ -62,6 +75,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                   // 2.1 Display the Form to input the ride preferences
                   RidePrefForm(
                     initRidePref: RidePrefService.currentRidePref,
+                    onSearch: onSearchRidePref,
                   ),
                   SizedBox(height: BlaSpacings.m),
 

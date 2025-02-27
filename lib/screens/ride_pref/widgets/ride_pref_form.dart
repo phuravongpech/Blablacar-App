@@ -23,8 +23,9 @@ import '../../../widgets/inputs/number_spinner.dart';
 class RidePrefForm extends StatefulWidget {
   // The form can be created with an optional initial RidePref.
   final RidePref? initRidePref;
+  final void Function(RidePref)? onSearch;
 
-  const RidePrefForm({super.key, this.initRidePref});
+  const RidePrefForm({super.key, this.initRidePref, this.onSearch});
 
   @override
   State<RidePrefForm> createState() => _RidePrefFormState();
@@ -52,6 +53,31 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // ----------------------------------
   // Handle events
   // ----------------------------------
+
+  void _handleSearch(){
+    //validate the form if have all data yet
+    if(departure == null || arrival == null){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select departure and arrival locations'),
+        ),
+      );
+      return;
+    }
+
+    //create a new RidePref object
+    final ridePref = RidePref(
+      departure: departure!,
+      arrival: arrival!,
+      departureDate: departureDate,
+      requestedSeats: requestedSeats,
+    );
+
+    //call the onSearch callback
+    if(widget.onSearch != null){
+      widget.onSearch!(ridePref);
+    }
+  }
 
   void _showDateSelection() async {
     final DateTime? picked = await showDatePicker(
@@ -199,6 +225,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
           BlaButton(
             text: "Search",
             buttonType: ButtonType.primary,
+            onPressed: _handleSearch,
           )
         ]);
   }
