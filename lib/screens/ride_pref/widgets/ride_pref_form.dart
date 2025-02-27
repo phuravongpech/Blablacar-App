@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week_3_blabla_project/utils/animations_util.dart';
 import 'package:week_3_blabla_project/widgets/actions/bla_button.dart';
 import 'package:week_3_blabla_project/widgets/inputs/location_picker.dart';
 
@@ -66,8 +67,8 @@ class _RidePrefFormState extends State<RidePrefForm> {
   }
 
   void _showLocationSelection(bool isDeparture) async {
-    final result = await Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => LocationPicker(
+    final result = await Navigator.of(context).push(
+        AnimationUtils.createBottomToTopRoute(LocationPicker(
             initialLocation: isDeparture ? departure : arrival)));
     if (result != null && result is Location) {
       setState(() {
@@ -82,8 +83,8 @@ class _RidePrefFormState extends State<RidePrefForm> {
 
   void _showSeatSelection() async {
     final result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => NumberSpinner(initialSeats: requestedSeats),
+      AnimationUtils.createBottomToTopRoute(
+        NumberSpinner(initialSeats: requestedSeats),
       ),
     );
 
