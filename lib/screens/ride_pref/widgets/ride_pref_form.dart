@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:week_3_blabla_project/widgets/actions/bla_button.dart';
+import 'package:week_3_blabla_project/widgets/inputs/location_picker.dart';
 
 import '../../../model/ride/locations.dart';
 import '../../../model/ride_pref/ride_pref.dart';
@@ -64,20 +65,20 @@ class _RidePrefFormState extends State<RidePrefForm> {
     }
   }
 
-  // void _showLocationSelection(bool isDeparture) async {
-  //   final result = await Navigator.of(context).push(MaterialPageRoute(
-  //       builder: (context) => LocationsService(
-  //           initialLocation: isDeparture ? departure : arrival)));
-  //   if (result != null && result is Location) {
-  //     setState(() {
-  //       if (isDeparture) {
-  //         departure = result;
-  //       } else {
-  //         arrival = result;
-  //       }
-  //     });
-  //   }
-  // }
+  void _showLocationSelection(bool isDeparture) async {
+    final result = await Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => LocationPicker(
+            initialLocation: isDeparture ? departure : arrival)));
+    if (result != null && result is Location) {
+      setState(() {
+        if (isDeparture) {
+          departure = result;
+        } else {
+          arrival = result;
+        }
+      });
+    }
+  }
 
   void _showSeatSelection() async {
     final result = await Navigator.of(context).push(
@@ -108,7 +109,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
   Widget _buildLocationPicker(
       String label, Location? location, bool isDeparture) {
     return InkWell(
-      // onTap: () => _showLocationSelection(isDeparture),
+      onTap: () => _showLocationSelection(isDeparture),
       child: Padding(
         padding: const EdgeInsets.all(BlaSpacings.s),
         child: Row(
@@ -118,17 +119,17 @@ class _RidePrefFormState extends State<RidePrefForm> {
               color: BlaColors.neutralLight,
             ),
             const SizedBox(width: BlaSpacings.s),
-            Text(
-              location?.name ?? label,
-              style: TextStyle(
-                color: location != null ? Colors.black : Colors.grey,
+            Expanded(
+              child: Text(
+                location?.name ?? label,
+                style: TextStyle(
+                  color: location != null ? Colors.black : Colors.grey,
+                ),
               ),
             ),
-            if (isDeparture &&
-                departure != null &&
-                arrival != null) // Show switch only on 'Leaving from'
+            if (isDeparture && departure != null && arrival != null)
               IconButton(
-                icon: const Icon(Icons.swap_vert),
+                icon: Icon(Icons.swap_vert, color: BlaColors.primary),
                 onPressed: _switchLocations,
               ),
           ],

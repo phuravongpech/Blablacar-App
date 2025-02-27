@@ -4,14 +4,14 @@ import 'package:week_3_blabla_project/theme/theme.dart';
 enum ButtonType { primary, secondary }
 
 class BlaButton extends StatelessWidget {
-  final String text;
+  final String? text;
   final IconData? icon;
   final VoidCallback? onPressed;
   final ButtonType buttonType;
 
   const BlaButton({
     super.key,
-    required this.text,
+    this.text,
     this.icon,
     this.onPressed,
     required this.buttonType,
@@ -35,7 +35,7 @@ class BlaButton extends StatelessWidget {
         onPressed: onPressed,
         icon: Icon(icon, color: isPrimary ? Colors.white : BlaColors.primary),
         label: Text(
-          text,
+          text ?? '',
           style: BlaTextStyles.label.copyWith(
             color: isPrimary ? BlaColors.white : BlaColors.primary,
           ),
