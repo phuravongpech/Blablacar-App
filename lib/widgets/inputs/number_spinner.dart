@@ -28,45 +28,56 @@ class NumberSpinner extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: BlaSpacings.m, vertical: BlaSpacings.m),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.remove,
-                        size: 30,
-                        color: BlaColors.primary,
-                      ),
-                      onPressed: currentSeats > 1
-                          ? () => setState(() => currentSeats--)
-                          : null,
+                Expanded(
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            size: 30,
+                            color: currentSeats > 1
+                                ? BlaColors.primary
+                                : BlaColors.greyLight,
+                          ),
+                          onPressed: currentSeats > 1
+                              ? () => setState(() => currentSeats--)
+                              : null,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Text(
+                            '$currentSeats',
+                            style: TextStyle(fontSize: 40),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            size: 30,
+                            color: BlaColors.primary,
+                          ),
+                          onPressed: () => setState(() => currentSeats++),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: BlaSpacings.l),
-                      child: Text(
-                        '$currentSeats',
-                        style: TextStyle(fontSize: 40),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.add,
-                        size: 30,
-                        color: BlaColors.primary,
-                      ),
-                      onPressed: () => setState(() => currentSeats++),
-                    ),
-                  ],
+                  ),
                 ),
-                SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context, currentSeats);
-                  },
-                  child: Text('Confirm'),
+
+                // confirm button
+                Center(
+                  child: SizedBox(
+                    width: 150,
+                    child: BlaButton(
+                      buttonType: ButtonType.primary,
+                      text: "Confirm",
+                      onPressed: () {
+                        Navigator.pop(context, currentSeats);
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
