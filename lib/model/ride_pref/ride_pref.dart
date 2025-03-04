@@ -12,6 +12,7 @@ class RidePreference {
   final Location arrival;
   final int requestedSeats;
   final RidesFilter? ridesFilter;
+  final RideSortType? sortType;
 
   RidePreference(
       {required this.departure,
@@ -19,7 +20,8 @@ class RidePreference {
       required this.arrival,
       required this.requestedSeats,
       RidesFilter? ridesFilter})
-      : ridesFilter = ridesFilter ?? RidesFilter(acceptPets: false);
+      : ridesFilter = ridesFilter ?? RidesFilter(acceptPets: false),
+        sortType = RideSortType(sortOrder: RideSortOrder.soonest);
 
   @override
   String toString() {

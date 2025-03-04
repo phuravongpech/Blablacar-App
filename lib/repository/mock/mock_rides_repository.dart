@@ -46,7 +46,8 @@ class MockRidesRepository extends RidesRepository {
   ];
 
   @override
-  List<Ride> getRides(RidePreference preference, RidesFilter? filter) {
+  List<Ride> getRides(
+      RidePreference preference, RidesFilter? filter, RideSortType? sortType) {
     final List<Ride> rides = [
       Ride(
           departureLocation:

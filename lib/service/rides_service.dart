@@ -37,13 +37,22 @@ class RidesService {
     return _instance!;
   }
 
-
-
   ///
   ///  Return the relevant rides, given the passenger preferences
   ///
   List<Ride> getRidesFor(RidePreference preferences) {
-    return repository.getRides(preferences, preferences.ridesFilter);
+    List<Ride> rides = repository.getRides(
+        preferences, preferences.ridesFilter, RideSortType(sortOrder: RideSortOrder.soonest));
+
+     // Sort rides based on the order (soonest → latest OR latest → soonest)
+  rides.sort((a, b) {
+    if (preferences.sortType?.sortOrder == RideSortOrder.latest) {
+      return b.departureDate.compareTo(a.departureDate);
+    }
+    return a.departureDate.compareTo(b.departureDate);
+  });
+
+  return rides;
   }
 }
 
@@ -52,3 +61,11 @@ class RidesFilter {
 
   RidesFilter({required this.acceptPets});
 }
+
+class RideSortType {
+  final RideSortOrder sortOrder;
+
+  RideSortType({required this.sortOrder});
+}
+
+enum RideSortOrder { soonest, latest}
