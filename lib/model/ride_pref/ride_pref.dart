@@ -1,3 +1,5 @@
+import 'package:week_3_blabla_project/service/rides_service.dart';
+
 import '../ride/locations.dart';
 
 ///
@@ -9,18 +11,22 @@ class RidePreference {
   final DateTime departureDate;
   final Location arrival;
   final int requestedSeats;
+  final RidesFilter? ridesFilter;
 
-  const RidePreference(
+  RidePreference(
       {required this.departure,
       required this.departureDate,
       required this.arrival,
-      required this.requestedSeats});
+      required this.requestedSeats,
+      RidesFilter? ridesFilter})
+      : ridesFilter = ridesFilter ?? RidesFilter(acceptPets: false);
 
   @override
   String toString() {
     return 'RidePref(departure: ${departure.name}, '
         'departureDate: ${departureDate.toIso8601String()}, '
         'arrival: ${arrival.name}, '
-        'requestedSeats: $requestedSeats)';
+        'requestedSeats: $requestedSeats)'
+        'ridesFilter: $ridesFilter';
   }
 }
