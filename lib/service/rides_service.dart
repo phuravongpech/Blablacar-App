@@ -40,19 +40,23 @@ class RidesService {
   ///
   ///  Return the relevant rides, given the passenger preferences
   ///
-  List<Ride> getRidesFor(RidePreference preferences) {
-    List<Ride> rides = repository.getRides(
-        preferences, preferences.ridesFilter, RideSortType(sortOrder: RideSortOrder.soonest));
+  List<Ride> getRidesFor(RidePreference preferences, RidesFilter? filter) {
+    List<Ride> rides = repository.getRides(preferences, preferences.ridesFilter,
+        RideSortType(sortOrder: RideSortOrder.soonest));
 
-     // Sort rides based on the order (soonest → latest OR latest → soonest)
-  rides.sort((a, b) {
-    if (preferences.sortType?.sortOrder == RideSortOrder.latest) {
-      return b.departureDate.compareTo(a.departureDate);
-    }
-    return a.departureDate.compareTo(b.departureDate);
-  });
+    return rides
+        .where((ride) =>
+            ride.departureLocation == preferences.departure &&
+            ride.arrivalLocation == preferences.arrival &&
+            ride.availableSeats >= preferences.requestedSeats &&
+            ride.ridesFilter.acceptPets == filter?.acceptPets)
+        .toList();
+  }
 
-  return rides;
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 }
 
@@ -68,4 +72,4 @@ class RideSortType {
   RideSortType({required this.sortOrder});
 }
 
-enum RideSortOrder { soonest, latest}
+enum RideSortOrder { soonest, latest }

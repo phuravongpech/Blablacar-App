@@ -9,40 +9,45 @@ import '../../service/rides_service.dart';
 class MockRidesRepository extends RidesRepository {
   List<User> users = [
     User(
-        firstName: 'Kannika',
-        lastName: 'Kannika',
-        email: 'hi',
-        phone: '0123456789',
-        profilePicture: 'assets/images/profile.png',
-        verifiedProfile: true),
+      firstName: 'Kannika',
+      lastName: 'Kannika',
+      email: 'hi',
+      phone: '0123456789',
+      profilePicture: 'assets/images/profile.png',
+      verifiedProfile: true,
+    ),
     User(
-        firstName: 'Chaylim',
-        lastName: 'Chaylim',
-        email: 'hi',
-        phone: '0123456789',
-        profilePicture: 'assets/images/profile.png',
-        verifiedProfile: true),
+      firstName: 'Chaylim',
+      lastName: 'Chaylim',
+      email: 'hi',
+      phone: '0123456789',
+      profilePicture: 'assets/images/profile.png',
+      verifiedProfile: true,
+    ),
     User(
-        firstName: 'Mengtech',
-        lastName: 'Mengtech',
-        email: 'hi',
-        phone: '0123456789',
-        profilePicture: 'assets/images/profile.png',
-        verifiedProfile: true),
+      firstName: 'Mengtech',
+      lastName: 'Mengtech',
+      email: 'hi',
+      phone: '0123456789',
+      profilePicture: 'assets/images/profile.png',
+      verifiedProfile: true,
+    ),
     User(
-        firstName: 'Limhao',
-        lastName: 'Limhao',
-        email: 'hi',
-        phone: '0123456789',
-        profilePicture: 'assets/images/profile.png',
-        verifiedProfile: true),
+      firstName: 'Limhao',
+      lastName: 'Limhao',
+      email: 'hi',
+      phone: '0123456789',
+      profilePicture: 'assets/images/profile.png',
+      verifiedProfile: true,
+    ),
     User(
-        firstName: 'Sovanda',
-        lastName: 'h',
-        email: 'hi',
-        phone: '01',
-        profilePicture: 'a',
-        verifiedProfile: true)
+      firstName: 'Sovanda',
+      lastName: 'h',
+      email: 'hi',
+      phone: '01',
+      profilePicture: 'a',
+      verifiedProfile: true,
+    ),
   ];
 
   @override
@@ -50,61 +55,62 @@ class MockRidesRepository extends RidesRepository {
       RidePreference preference, RidesFilter? filter, RideSortType? sortType) {
     final List<Ride> rides = [
       Ride(
-          departureLocation:
-              Location(name: 'Battambang', country: Country.cambodia),
-          departureDate: DateTime.now().add(Duration(hours: 5, minutes: 30)),
-          arrivalLocation:
-              Location(name: 'Siem Reap', country: Country.cambodia),
-          arrivalDateTime: DateTime.now().add(Duration(hours: 7, minutes: 30)),
-          driver: users[0],
-          availableSeats: 2,
-          pricePerSeat: 10.0,
-          ridesFilter: RidesFilter(acceptPets: true)),
+        departureLocation:
+            Location(name: 'Battambang', country: Country.cambodia),
+        departureDate: DateTime.now().add(Duration(hours: 5, minutes: 30)),
+        arrivalLocation: Location(name: 'Siem Reap', country: Country.cambodia),
+        arrivalDateTime: DateTime.now().add(Duration(hours: 7, minutes: 30)),
+        driver: users[0],
+        availableSeats: 2,
+        pricePerSeat: 10.0,
+        ridesFilter: RidesFilter(acceptPets: false),
+      ),
       Ride(
-          departureLocation:
-              Location(name: 'Battambang', country: Country.cambodia),
-          departureDate: DateTime.now().add(Duration(hours: 20)),
-          arrivalLocation:
-              Location(name: 'Siem Reap', country: Country.cambodia),
-          arrivalDateTime: DateTime.now().add(Duration(hours: 22)),
-          driver: users[1],
-          availableSeats: 0,
-          pricePerSeat: 10.0,
-          ridesFilter: RidesFilter(acceptPets: true)),
+        departureLocation:
+            Location(name: 'Battambang', country: Country.cambodia),
+        departureDate: DateTime.now().add(Duration(hours: 20)),
+        arrivalLocation: Location(name: 'Siem Reap', country: Country.cambodia),
+        arrivalDateTime: DateTime.now().add(Duration(hours: 22)),
+        driver: users[1],
+        availableSeats: 0,
+        pricePerSeat: 10.0,
+        ridesFilter: RidesFilter(acceptPets: false),
+      ),
       Ride(
-          departureLocation:
-              Location(name: 'Battambang', country: Country.cambodia),
-          departureDate: DateTime.now().add(Duration(hours: 5)),
-          arrivalLocation:
-              Location(name: 'Siem Reap', country: Country.cambodia),
-          arrivalDateTime: DateTime.now().add(Duration(hours: 8)),
-          driver: users[2],
-          availableSeats: 1,
-          pricePerSeat: 10.0,
-          ridesFilter: RidesFilter(acceptPets: true)),
+        departureLocation:
+            Location(name: 'Battambang', country: Country.cambodia),
+        departureDate: DateTime.now().add(Duration(hours: 5)),
+        arrivalLocation: Location(name: 'Siem Reap', country: Country.cambodia),
+        arrivalDateTime: DateTime.now().add(Duration(hours: 8)),
+        driver: users[2],
+        availableSeats: 1,
+        pricePerSeat: 10.0,
+        ridesFilter: RidesFilter(acceptPets: true),
+      ),
       Ride(
-          departureLocation:
-              Location(name: 'Battambang', country: Country.cambodia),
-          departureDate: DateTime.now().add(Duration(hours: 20)),
-          arrivalLocation:
-              Location(name: 'Siem Reap', country: Country.cambodia),
-          arrivalDateTime: DateTime.now().add(Duration(hours: 22)),
-          driver: users[3],
-          availableSeats: 2,
-          pricePerSeat: 10.0,
-          ridesFilter: RidesFilter(acceptPets: true)),
+        departureLocation:
+            Location(name: 'Battambang', country: Country.cambodia),
+        departureDate: DateTime.now().add(Duration(hours: 20)),
+        arrivalLocation: Location(name: 'Siem Reap', country: Country.cambodia),
+        arrivalDateTime: DateTime.now().add(Duration(hours: 22)),
+        driver: users[3],
+        availableSeats: 2,
+        pricePerSeat: 10.0,
+        ridesFilter: RidesFilter(acceptPets: false),
+      ),
       Ride(
-          departureLocation:
-              Location(name: 'Battambang', country: Country.cambodia),
-          departureDate: DateTime.now().add(Duration(hours: 5)),
-          arrivalLocation:
-              Location(name: 'Siem Reap', country: Country.cambodia),
-          arrivalDateTime: DateTime.now().add(Duration(hours: 8)),
-          driver: users[4],
-          availableSeats: 1,
-          pricePerSeat: 10.0,
-          ridesFilter: RidesFilter(acceptPets: true)),
+        departureLocation:
+            Location(name: 'Battambang', country: Country.cambodia),
+        departureDate: DateTime.now().add(Duration(hours: 5)),
+        arrivalLocation: Location(name: 'Siem Reap', country: Country.cambodia),
+        arrivalDateTime: DateTime.now().add(Duration(hours: 8)),
+        driver: users[4],
+        availableSeats: 1,
+        pricePerSeat: 10.0,
+        ridesFilter: RidesFilter(acceptPets: false),
+      ),
     ];
+
     return rides;
   }
 }
