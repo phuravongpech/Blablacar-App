@@ -37,6 +37,10 @@ class RidesService {
     return _instance!;
   }
 
+  
+
+  // List<Ride> get getAvailableRides => availableRides ?? [];
+
   ///
   ///  Return the relevant rides, given the passenger preferences
   ///

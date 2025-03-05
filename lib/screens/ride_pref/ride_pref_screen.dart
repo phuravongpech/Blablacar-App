@@ -24,24 +24,28 @@ class RidePrefScreen extends StatefulWidget {
 }
 
 class _RidePrefScreenState extends State<RidePrefScreen> {
- 
-  onRidePrefSelected(RidePreference newPreference) async {
+  // RidePreference? get currentRidePreference =>
+  //     RidePrefService.instance.currentPreference;
 
+  onRidePrefSelected(RidePreference newPreference) async {
     // 1 - Update the current preference
     RidePrefService.instance.setCurrentPreference(newPreference);
- 
+
     // 2 - Navigate to the rides screen (with a buttom to top animation)
-    await Navigator.of(context).push(AnimationUtils.createBottomToTopRoute(RidesScreen()));
-  
+    await Navigator.of(context)
+        .push(AnimationUtils.createBottomToTopRoute(RidesScreen()));
+
     // 3 - After wait  - Update the state   -- TODO MAKE IT WITH STATE MANAGEMENT
-    setState(() { });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    RidePreference? currentRidePreference =
+        RidePrefService.instance.currentPreference;
 
-    RidePreference? currentRidePreference = RidePrefService.instance.currentPreference;
-    List<RidePreference> pastPreferences = RidePrefService.instance.getPastPreferences();
+    List<RidePreference> pastPreferences =
+        RidePrefService.instance.getPastPreferences();
 
     return Stack(
       children: [
@@ -68,7 +72,9 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // 2.1 Display the Form to input the ride preferences
-                  RidePrefForm(initialPreference: currentRidePreference, onSubmit: onRidePrefSelected),
+                  RidePrefForm(
+                      initialPreference: currentRidePreference,
+                      onSubmit: onRidePrefSelected),
                   SizedBox(height: BlaSpacings.m),
 
                   // 2.2 Optionally display a list of past preferences
